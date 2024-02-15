@@ -20,7 +20,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     background-color: rgb(56, 56, 48);
-    height: 960px;
+    height: 800px;
     border-radius: 32px;
 }
 
@@ -35,30 +35,19 @@ h1 {
 .control_unit {
     display: flex;
     margin-bottom: 50px;
-    width: 80%;
     flex: 1;
 }
 
 .numbers {
     display: flex;
     flex-direction: column;
-    /* flex: 3; */
-    width: 75%;
-    justify-content: space-evenly;
-}
-
-.controls {
-    display: flex;
-    flex-direction: column;
-    /* flex: 1; */
-    width: 25%;
-    justify-content: space-evenly;
-    align-items: center;
+    gap: 8px;
+    justify-content: center;
 }
 
 .row {
     display: flex;
-    justify-content: space-evenly;
+    gap: 8px;
 }
 
 button {
@@ -68,6 +57,7 @@ button {
     border-radius: 8px;
     background-color: gray;
     cursor: pointer;
+    width: 130px;
 }
 
 .operator {
@@ -76,5 +66,8 @@ button {
 
 .clear {
     background-color: rgb(208, 35, 35);
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
