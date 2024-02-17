@@ -13,11 +13,13 @@ let subtractNumbers = (a,b) => {
 }
 
 let multiplyNumbers = (a,b) => {
-    return a * b;
+    let number = a * b;
+    return number.toFixed(2);
 }
 
 let divideNumbers = (a,b) => {
-    return a / b;
+    let number = a / b;
+    return number.toFixed(2);
 }
 
 let operate = (operator, a, b) => {
@@ -32,8 +34,13 @@ let operate = (operator, a, b) => {
             firstNumber = result_area.innerHTML;
             break;
         case '/':
-            result_area.innerHTML = divideNumbers(a,b);
-            firstNumber = result_area.innerHTML;
+            if (b === "0") {
+                firstNumber = "Nope -.-";
+                return firstNumber;
+            } else {
+                result_area.innerHTML = divideNumbers(a,b);
+                firstNumber = result_area.innerHTML;
+            }
             break;
         case 'x':
             result_area.innerHTML = multiplyNumbers(a,b);
@@ -50,18 +57,18 @@ let getOperator = () => {
     let btn_operator = document.querySelectorAll('.operator');
     btn_operator.forEach((button) => {
         button.addEventListener('click', () => {
-            if (button.innerHTML === "=") {
-                operate(operator, firstNumber, result_area.innerHTML);
-            } else {
-                operator = button.innerHTML;
-                operatorStatus = true;
-                if (firstNumber === '') {
-                    firstNumber = result_area.innerHTML;
-                } else {
-                    operate(operator, firstNumber, result_area.innerHTML)
-                }
+            operatorStatus = true;
+            if (operator === '=') {
+                operate(operator, firstNumber, result_area.innerHTML)
             }
-            
+            if (firstNumber === '') {
+                firstNumber = result_area.innerHTML;
+                operator = button.innerHTML;
+            } else {
+                operate(operator, firstNumber, result_area.innerHTML);
+                result_area.innerHTML = firstNumber;
+                operator = button.innerHTML;
+            }
         });
     });
 }
@@ -74,11 +81,28 @@ let getNumber = () => {
                 result_area.innerHTML = '';
                 operatorStatus = false;
             } 
-            updateResult(button.innerHTML);
-            
+            if (button.innerHTML === '.') {
+                if (result_area.innerHTML.indexOf('.') === -1) {
+                    console.log(button);
+                    updateResult(button.innerHTML); 
+                }
+            } else {
+                updateResult(button.innerHTML);
+            }
         });
     });
 }
 
+let clear = () => {
+    let btn_clear = document.querySelector('.clear');
+    btn_clear.addEventListener('click', () => {
+        firstNumber = '';
+        operator = '';
+        result_area.innerHTML = '';
+        operatorStatus = false;
+    })
+}
+
 getOperator();
 getNumber();
+clear();
